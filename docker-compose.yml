@@ -1,0 +1,52 @@
+# Run the app in Docker on Windows, macOS or Linux. See README "Docker".
+#
+#   docker compose up --build              # dev server (next dev), hot reload, http://localhost:3000
+#   docker compose --profile prod up --build prod   # production build (next start)
+#
+# Both read secrets from .env.local (copy .env.example first).
+
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    image: expense-tracker:dev
+    # Reinstall only if the lockfile changed since the node_modules volume was created, then migrate + dev.
+    command: sh -c "pnpm install --frozen-lockfile && pnpm db:migrate && pnpm dev -H 0.0.0.0 -p 3000"
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    env_file: .env.local
+    environment:
+      NODE_ENV: development
+      # Set to e.g. 1000 if edits on the host don't hot-reload (Windows drive mounted into Docker).
+      NEXT_WATCH_POLL_MS: ${NEXT_WATCH_POLL_MS:-}
+    volumes:
+      - .:/app
+      # Linux-only folders stay in Docker volumes so host (Windows/macOS) files never mix with them.
+      - node_modules:/app/node_modules
+      - next_cache:/app/.next
+      - pglite_data:/app/.data
+    init: true
+
+  prod:
+    profiles: ["prod"]
+    build:
+      context: .
+      target: runner
+    image: expense-tracker:prod
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    env_file: .env.local
+    environment:
+      # Required by Auth.js when running `next start` outside Vercel.
+      AUTH_TRUST_HOST: "true"
+    volumes:
+      - pglite_data:/app/.data
+    init: true
+    restart: unless-stopped
+
+volumes:
+  node_modules:
+  next_cache:
+  pglite_data:
+  

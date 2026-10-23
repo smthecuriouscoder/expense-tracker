@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-heading: var(--font-space-grotesk);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+  --color-income: var(--income);
+  --color-refund: var(--refund);
+  --color-warning: var(--warning);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ── Design tokens ──────────────────────────────────────────────────────────
+   "Dark premium" (DECISIONS.md §8): ink-navy base, frosted glass surfaces,
+   teal → cyan → blue accent. Light mode mirrors it with a pale aurora. */
+
+:root {
+  --radius: 0.875rem;
+  --background: #f5f7fb;
+  --foreground: #0b1220;
+  --card: rgb(255 255 255 / 0.72);
+  --card-foreground: #0b1220;
+  --popover: #ffffff;
+  --popover-foreground: #0b1220;
+  --primary: #0f766e;
+  --primary-foreground: #ffffff;
+  --secondary: #e8edf5;
+  --secondary-foreground: #0b1220;
+  --muted: #eaeef5;
+  --muted-foreground: #556070;
+  --accent: #e3f6f3;
+  --accent-foreground: #0b1220;
+  --destructive: #dc2626;
+  --border: rgb(15 23 42 / 0.09);
+  --input: rgb(15 23 42 / 0.14);
+  --ring: #0891b2;
+
+  --glass: rgb(255 255 255 / 0.66);
+  --glass-strong: rgb(255 255 255 / 0.94);
+  --glass-border: rgb(15 23 42 / 0.08);
+  --glass-highlight: rgb(255 255 255 / 0.9);
+  --glass-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 12px 32px -12px rgb(15 23 42 / 0.12);
+  --aurora-1: rgb(20 184 166 / 0.16);
+  --aurora-2: rgb(59 130 246 / 0.14);
+  --aurora-3: rgb(34 211 238 / 0.1);
+  --gradient-brand: linear-gradient(135deg, #14b8a6 0%, #06b6d4 50%, #3b82f6 100%);
+  --glow: 0 0 0 1px rgb(13 148 136 / 0.15), 0 10px 30px -10px rgb(13 148 136 / 0.35);
+
+  --income: #0f766e;
+  --refund: #0369a1;
+  --warning: #b45309;
+
+  /* Charts (validated with the dataviz palette validator against #f7f9fc). */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-muted: #b5b3ad;
+  --chart-grid: rgb(15 23 42 / 0.07);
+  --chart-axis: #556070;
+  --chart-glow: rgb(42 120 214 / 0.35);
+  --seq-0: #e9edf4;
+  --seq-1: #cde2fb;
+  --seq-2: #86b6ef;
+  --seq-3: #3987e5;
+  --seq-4: #1c5cab;
+  --seq-5: #0d366b;
+}
+
+.dark {
+  --background: #070b14;
+  --foreground: #e8edf5;
+  --card: rgb(255 255 255 / 0.04);
+  --card-foreground: #e8edf5;
+  --popover: #0e1524;
+  --popover-foreground: #e8edf5;
+  --primary: #2dd4bf;
+  --primary-foreground: #04201c;
+  --secondary: rgb(255 255 255 / 0.06);
+  --secondary-foreground: #e8edf5;
+  --muted: rgb(255 255 255 / 0.06);
+  --muted-foreground: #94a3b8;
+  --accent: rgb(45 212 191 / 0.1);
+  --accent-foreground: #e8edf5;
+  --destructive: #f87171;
+  --border: rgb(255 255 255 / 0.08);
+  --input: rgb(255 255 255 / 0.12);
+  --ring: #22d3ee;
+
+  --glass: rgb(255 255 255 / 0.04);
+  --glass-strong: rgb(14 21 36 / 0.94);
+  --glass-border: rgb(255 255 255 / 0.08);
+  --glass-highlight: rgb(255 255 255 / 0.08);
+  --glass-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -20px rgb(0 0 0 / 0.6);
+  --aurora-1: rgb(20 184 166 / 0.22);
+  --aurora-2: rgb(59 130 246 / 0.2);
+  --aurora-3: rgb(34 211 238 / 0.12);
+  --gradient-brand: linear-gradient(135deg, #2dd4bf 0%, #22d3ee 50%, #60a5fa 100%);
+  --glow: 0 0 0 1px rgb(45 212 191 / 0.25), 0 0 40px -8px rgb(34 211 238 / 0.45);
+
+  --income: #2dd4bf;
+  --refund: #38bdf8;
+  --warning: #fbbf24;
+
+  /* Charts (validated against #0d1424). */
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-muted: #4b5563;
+  --chart-grid: rgb(255 255 255 / 0.06);
+  --chart-axis: #94a3b8;
+  --chart-glow: rgb(57 135 229 / 0.6);
+  --seq-0: rgb(255 255 255 / 0.05);
+  --seq-1: #104281;
+  --seq-2: #1c5cab;
+  --seq-3: #2a78d6;
+  --seq-4: #5598e7;
+  --seq-5: #9ec5f4;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+/* ── Surfaces & effects ──────────────────────────────────────────────────── */
+
+/* Frosted card surface. */
+@utility glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+
+/* Denser glass for sticky bars and sheets that sit over content. */
+@utility glass-strong {
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+}
+
+/* 1px gradient border + soft glow, for hero elements. */
+@utility glow-ring {
+  position: relative;
+  box-shadow: var(--glow);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--gradient-brand);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+@utility bg-brand {
+  background-image: var(--gradient-brand);
+}
+
+@utility text-gradient {
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fixed aurora backdrop behind the whole app. */
+@utility aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 30rem at 0% 0%, var(--aurora-1), transparent 60%),
+    radial-gradient(36rem 28rem at 100% 10%, var(--aurora-2), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 110%, var(--aurora-3), transparent 60%);
+}
+
+/* Moving highlight for loading buttons. */
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+@utility shimmer {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.35), transparent);
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer::after { animation: none; }
+}

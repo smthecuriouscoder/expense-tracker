@@ -1,0 +1,5 @@
+# Force LF everywhere so files checked out on Windows still work inside Linux containers.
+* text=auto eol=lf
+*.svg text eol=lf
+*.png binary
+*.ico binary

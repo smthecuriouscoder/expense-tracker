@@ -1,0 +1,17 @@
+# Keep the build context small and host-independent (no macOS/Windows binaries or secrets).
+node_modules
+.next
+.data
+.git
+.claude
+.vercel
+coverage
+*.tsbuildinfo
+.env*
+!.env.example
+Dockerfile
+docker-compose*.yml
+.dockerignore
+npm-debug.log*
+.pnpm-debug.log*
+.DS_Store
